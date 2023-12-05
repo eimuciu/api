@@ -27,6 +27,7 @@ builder.Services.AddCors(options =>
 );
 // Custom services
 builder.Services.AddSingleton<PresenceTracker>();
+builder.Services.AddScoped<UserRepository>();
 
 var app = builder.Build();
 

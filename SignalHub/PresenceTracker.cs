@@ -4,6 +4,8 @@ namespace api.SignalHub
     {
         private readonly List<string> _onlineUsers = new List<string>();
 
+        // private readonly Dictionary<string, List<string>> onlineUsers = new Dictionary<string, List<string>>();
+
         public void AddUser(string nickname)
         {
             _onlineUsers.Add(nickname);

@@ -1,6 +1,8 @@
+using System.ComponentModel;
 using api.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace api.Data
 {
@@ -17,6 +19,22 @@ namespace api.Data
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<User> GetUser(string nickname)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Nickname.ToLower() == nickname.ToLower());
+        }
+
+        public async Task<bool> UserExists(string nickname)
+        {
+            bool exists = false;
+
+            if (await _context.Users.AnyAsync(x => x.Nickname.ToLower() == nickname.ToLower()))
+            {
+                exists = true;
+            }
+            return exists;
         }
     }
 }
