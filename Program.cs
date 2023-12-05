@@ -1,10 +1,11 @@
 using api.Data;
 using Microsoft.EntityFrameworkCore;
-using SignalRChat.Hubs;
+using api.SignalHub;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
+builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -24,17 +25,21 @@ builder.Services.AddCors(options =>
 }
 
 );
+// Custom services
+builder.Services.AddSingleton<PresenceTracker>();
 
 var app = builder.Build();
 
 // Middlewares
 app.UseCors("AllowAll");
+app.MapControllers();
 
 // Routes
 app.MapGet("/", () => "Hello World!");
 
 // Hubs
 app.MapHub<ChatHub>("/chatHub");
+app.MapHub<ConnectionHub>("/connectionHub");
 
 // Data seed
 using var scope = app.Services.CreateScope();
