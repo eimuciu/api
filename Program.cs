@@ -30,6 +30,7 @@ builder.Services.AddSingleton<PresenceTracker>();
 builder.Services.AddSingleton<GroupPresenceTracker>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<MessageRepository>();
+builder.Services.AddScoped<GroupRepository>();
 
 var app = builder.Build();
 
