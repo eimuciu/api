@@ -2,20 +2,32 @@ namespace api.SignalHub
 {
     public class PresenceTracker
     {
-        private readonly List<string> _onlineUsers = new List<string>();
+        // private readonly List<string> _onlineUsers = new List<string>();
 
-        // private readonly Dictionary<string, List<string>> onlineUsers = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> _onlineUsers = new Dictionary<string, List<string>>();
 
-        public void AddUser(string nickname)
+        public void AddUser(string nickname, string connectionId)
         {
-            _onlineUsers.Add(nickname);
+            if (_onlineUsers.ContainsKey(nickname))
+            {
+                _onlineUsers[nickname].Add(connectionId);
+            }
+            else
+            {
+                _onlineUsers.Add(nickname, new List<string> { connectionId });
+            }
+        }
+
+        public void RemoveUser(string nickname, string connectionId)
+        {
+            _onlineUsers[nickname].Remove(connectionId);
         }
 
         public bool NicknameOnline(string nickname)
         {
             bool isOnline = false;
 
-            if (_onlineUsers.Any(x => x.ToLower() == nickname.ToLower()))
+            if (_onlineUsers.ContainsKey(nickname) && _onlineUsers[nickname].Any())
             {
                 isOnline = true;
             }

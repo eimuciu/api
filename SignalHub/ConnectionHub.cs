@@ -18,6 +18,18 @@ namespace api.SignalHub
         // {
         // }
 
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            var httpClient = Context.GetHttpContext();
+            var query = httpClient.Request.Query["nick"];
+
+            Console.WriteLine("Disconnecting");
+            Console.WriteLine(query);
+
+            _tracker.RemoveUser(query, Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
+        }
+
         public async Task RegisterUser(string nickname)
         {
             if (_tracker.NicknameOnline(nickname))
@@ -26,7 +38,7 @@ namespace api.SignalHub
             }
             else
             {
-                _tracker.AddUser(nickname);
+                _tracker.AddUser(nickname, Context.ConnectionId);
                 if (await _repository.UserExists(nickname))
                 {
                     User userData = await _repository.GetUser(nickname);
