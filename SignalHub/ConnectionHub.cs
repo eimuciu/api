@@ -34,7 +34,7 @@ namespace api.SignalHub
         {
             if (_tracker.NicknameOnline(nickname))
             {
-                await Clients.Caller.SendAsync("UserRegistration", new { Connected = false, Message = "Pick another nickname" });
+                await Clients.Caller.SendAsync("UserRegistration", new { Connected = false, Message = "You need a new nickname" });
             }
             else
             {

@@ -28,6 +28,7 @@ builder.Services.AddCors(options =>
 // Custom services
 builder.Services.AddSingleton<PresenceTracker>();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<GroupPresenceTracker>();
 
 var app = builder.Build();
 
@@ -41,6 +42,7 @@ app.MapGet("/", () => "Hello World!");
 // Hubs
 app.MapHub<ChatHub>("/chatHub");
 app.MapHub<ConnectionHub>("/connectionHub");
+app.MapHub<GroupHub>("/groupHub");
 
 // Data seed
 using var scope = app.Services.CreateScope();
