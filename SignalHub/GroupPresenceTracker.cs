@@ -4,7 +4,7 @@ namespace api.SignalHub
     {
         Dictionary<string, List<string>> _groupsOnline = new Dictionary<string, List<string>>();
 
-        public List<string> AddToGroup(string groupname, string nickname)
+        public List<string> AddUserToGroup(string groupname, string nickname)
         {
             if (_groupsOnline.ContainsKey(groupname))
             {
@@ -17,7 +17,7 @@ namespace api.SignalHub
             return _groupsOnline[groupname];
         }
 
-        public void RemoveFromGroup(string groupname, string nickname)
+        public void RemoveUserFromGroup(string groupname, string nickname)
         {
             _groupsOnline[groupname].Remove(nickname);
         }
