@@ -17,11 +17,11 @@ namespace api.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Message>()
-                .HasOne(s => s.Sender);
+            // builder.Entity<Message>()
+            //     .HasOne(s => s.Sender);
 
-            builder.Entity<Message>()
-                .HasOne(s => s.Group);
+            // builder.Entity<Message>()
+            //     .HasOne(s => s.Group);
 
             // builder.Entity<UserLike>()
             //     .HasOne(s => s.TargetUser)

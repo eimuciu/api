@@ -10,7 +10,8 @@ namespace api.Data
         {
             if (await context.Groups.AnyAsync()
              && await context.Users.AnyAsync()
-             && await context.Messages.AnyAsync()) return;
+             && await context.Messages.AnyAsync()
+             ) return;
 
             var GroupSeedData = await File.ReadAllTextAsync("Data/SeedData/GroupSeedData.json");
             var groupDataList = JsonSerializer.Deserialize<List<Group>>(GroupSeedData);

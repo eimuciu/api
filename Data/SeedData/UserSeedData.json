@@ -1,22 +1,18 @@
 [
   {
     "Nickname": "Peter",
-    "Joined": "2023-12-05 08:12:27.2578264",
-    "IsGuest": 1
+    "IsGuest": true
   },
   {
     "Nickname": "John",
-    "Joined": "2023-12-05 08:12:58.8362194",
-    "IsGuest": 1
+    "IsGuest": true
   },
   {
     "Nickname": "Max",
-    "Joined": "2023-12-05 12:26:10.7714561",
-    "IsGuest": 1
+    "IsGuest": true
   },
   {
     "Nickname": "Lamar",
-    "Joined": "2023-12-06 11:42:16.4699187",
-    "IsGuest": 1
+    "IsGuest": true
   }
 ]
