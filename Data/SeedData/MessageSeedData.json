@@ -1,0 +1,34 @@
+[
+  {
+    "Content": "My message",
+    "SenderId": 1,
+    "SenderNickname": "Peter",
+    "GroupId": 1,
+    "Groupname": "Music",
+    "MessageSent": "2023-12-05 08:08:28.5471237"
+  },
+  {
+    "Content": "My message 2",
+    "SenderId": 2,
+    "SenderNickname": "John",
+    "GroupId": 1,
+    "Groupname": "Music",
+    "MessageSent": "2023-12-05 08:08:28.5471237"
+  },
+  {
+    "Content": "My message Off",
+    "SenderId": 2,
+    "SenderNickname": "John",
+    "GroupId": 2,
+    "Groupname": "Movies",
+    "MessageSent": "2023-12-05 08:08:28.5471237"
+  },
+  {
+    "Content": "My message ON By ",
+    "SenderId": 3,
+    "SenderNickname": "Max",
+    "GroupId": 2,
+    "Groupname": "Movies",
+    "MessageSent": "2023-12-05 08:08:28.5471237"
+  }
+]
