@@ -11,12 +11,9 @@ namespace api.Data
             _context = context;
         }
 
-        public async void GetGroupMessages(string nickname, string groupname)
+        public async Task<List<Message>> GetGroupMessages(string groupname)
         {
-            User userData = await _context.Users.FirstOrDefaultAsync(x => x.Nickname.ToLower() == nickname.ToLower());
-            Group groupData = await _context.Groups.FirstOrDefaultAsync(x => x.Name.ToLower() == groupname.ToLower());
-
-            // await _context.Messages.Include(x => x.GroupId).FirstOrDefaultAsync
+            return await _context.Messages.Where(x => x.GroupName.ToLower() == groupname.ToLower()).ToListAsync();
 
         }
     }
