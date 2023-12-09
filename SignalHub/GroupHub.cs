@@ -13,11 +13,17 @@ namespace api.SignalHub
             _groupTracker = groupTracker;
             _messageRepository = messageRepository;
         }
-        public async void ConnectUserToGroup()
+        public async void ConnectUserToGroup(string nickname, string groupname, string previousGroup)
         {
-            var httpContext = Context.GetHttpContext();
-            string nickname = httpContext.Request.Query["nick"];
-            string groupname = httpContext.Request.Query["groupname"];
+            Console.WriteLine(previousGroup);
+            if (!string.IsNullOrEmpty(previousGroup))
+            {
+                _groupTracker.RemoveUserFromGroup(previousGroup, nickname);
+            }
+
+            // var httpContext = Context.GetHttpContext();
+            // string nickname = httpContext.Request.Query["nick"];
+            // string groupname = httpContext.Request.Query["groupname"];
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupname);
 

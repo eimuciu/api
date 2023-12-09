@@ -28,7 +28,6 @@ namespace api.Data
             {
                 context.Users.Add(data);
             }
-
             var MessageSeedData = await File.ReadAllTextAsync("Data/SeedData/MessageSeedData.json");
             var messageDataList = JsonSerializer.Deserialize<List<Message>>(MessageSeedData);
 
