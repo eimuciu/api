@@ -1,4 +1,5 @@
 using api.Data;
+using api.DTOs;
 using api.Entities;
 using Microsoft.AspNetCore.SignalR;
 
@@ -33,11 +34,10 @@ namespace api.SignalHub
             await Clients.Caller.SendAsync("OnUserConnectionToGroup", new { usersInGroup = usersInGroup, groupMessages = groupMessages });
         }
 
-        public async void SendGroupMessage(string groupname, string message)
+        public async void SendGroupMessage(MessageDto message)
         {
-            Console.WriteLine(groupname);
-            Console.WriteLine(message);
-            await Clients.Group(groupname).SendAsync("NewMessage", message);
+            Message newMsg = await _messageRepository.AddNewMessage(message);
+            await Clients.Group(message.GroupName).SendAsync("NewMessage", newMsg);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
