@@ -31,7 +31,13 @@ namespace api.SignalHub
             List<Message> groupMessages = await _messageRepository.GetGroupMessages(groupname);
 
             await Clients.Caller.SendAsync("OnUserConnectionToGroup", new { usersInGroup = usersInGroup, groupMessages = groupMessages });
+        }
 
+        public async void SendGroupMessage(string groupname, string message)
+        {
+            Console.WriteLine(groupname);
+            Console.WriteLine(message);
+            await Clients.Group(groupname).SendAsync("NewMessage", message);
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
