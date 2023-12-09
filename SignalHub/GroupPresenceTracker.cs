@@ -8,7 +8,8 @@ namespace api.SignalHub
         {
             if (_groupsOnline.ContainsKey(groupname))
             {
-                _groupsOnline[groupname].Add(nickname);
+                if (!_groupsOnline[groupname].Contains(nickname))
+                    _groupsOnline[groupname].Add(nickname);
             }
             else
             {

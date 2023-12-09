@@ -15,7 +15,6 @@ namespace api.SignalHub
         }
         public async void ConnectUserToGroup(string nickname, string groupname, string previousGroup)
         {
-            Console.WriteLine(previousGroup);
             if (!string.IsNullOrEmpty(previousGroup))
             {
                 _groupTracker.RemoveUserFromGroup(previousGroup, nickname);
