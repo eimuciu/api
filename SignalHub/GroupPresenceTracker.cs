@@ -6,20 +6,21 @@ namespace api.SignalHub
 
         public List<string> AddUserToGroup(string groupname, string nickname)
         {
-            if (_groupsOnline.ContainsKey(groupname))
+
+            if (_groupsOnline.ContainsKey(groupname) && _groupsOnline[groupname].Contains(nickname)) { return _groupsOnline[groupname]; }
+
+            if (_groupsOnline.ContainsKey(groupname) && !_groupsOnline[groupname].Contains(nickname))
             {
-                if (!_groupsOnline[groupname].Contains(nickname))
-                    _groupsOnline[groupname].Add(nickname);
+                _groupsOnline[groupname].Add(nickname);
+                return _groupsOnline[groupname];
             }
-            else
-            {
-                _groupsOnline.Add(groupname, new List<string> { nickname });
-            }
+            _groupsOnline.Add(groupname, new List<string> { nickname });
             return _groupsOnline[groupname];
         }
 
         public void RemoveUserFromGroup(string groupname, string nickname)
         {
+            if (!_groupsOnline.ContainsKey(groupname)) return;
             _groupsOnline[groupname].Remove(nickname);
         }
     }

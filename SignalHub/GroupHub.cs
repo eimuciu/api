@@ -9,10 +9,12 @@ namespace api.SignalHub
     {
         GroupPresenceTracker _groupTracker;
         MessageRepository _messageRepository;
-        public GroupHub(GroupPresenceTracker groupTracker, MessageRepository messageRepository)
+        UserRepository _userRepository;
+        public GroupHub(GroupPresenceTracker groupTracker, MessageRepository messageRepository, UserRepository userRepository)
         {
             _groupTracker = groupTracker;
             _messageRepository = messageRepository;
+            _userRepository = userRepository;
         }
         public async void ConnectUserToGroup(string nickname, string groupname, string previousGroup)
         {
@@ -31,7 +33,10 @@ namespace api.SignalHub
 
             List<Message> groupMessages = await _messageRepository.GetGroupMessages(groupname);
 
+            User presentUser = await _userRepository.GetUser(nickname);
+
             await Clients.Caller.SendAsync("OnUserConnectionToGroup", new { usersInGroup = usersInGroup, groupMessages = groupMessages });
+            await Clients.OthersInGroup(groupname).SendAsync("OnUserJoinGroup", presentUser);
         }
 
         public async void SendGroupMessage(MessageDto message)
@@ -50,6 +55,8 @@ namespace api.SignalHub
             Console.WriteLine(nickname);
 
             _groupTracker.RemoveUserFromGroup(groupname, nickname);
+
+            await Clients.Group(groupname).SendAsync("OnUserDisconnecting", nickname);
             await base.OnDisconnectedAsync(exception);
         }
     }
