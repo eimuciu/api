@@ -23,5 +23,10 @@ namespace api.SignalHub
             if (!_groupsOnline.ContainsKey(groupname)) return;
             _groupsOnline[groupname].Remove(nickname);
         }
+
+        public List<string> GetGroupUsers(string groupname)
+        {
+            return _groupsOnline[groupname];
+        }
     }
 }

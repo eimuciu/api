@@ -18,14 +18,6 @@ namespace api.SignalHub
         }
         public async void ConnectUserToGroup(string nickname, string groupname, string previousGroup)
         {
-            if (!string.IsNullOrEmpty(previousGroup))
-            {
-                _groupTracker.RemoveUserFromGroup(previousGroup, nickname);
-            }
-
-            // var httpContext = Context.GetHttpContext();
-            // string nickname = httpContext.Request.Query["nick"];
-            // string groupname = httpContext.Request.Query["groupname"];
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupname);
 
@@ -35,8 +27,25 @@ namespace api.SignalHub
 
             User presentUser = await _userRepository.GetUser(nickname);
 
+            if (!string.IsNullOrEmpty(previousGroup))
+            {
+                _groupTracker.RemoveUserFromGroup(previousGroup, nickname);
+
+            }
+
+            // var httpContext = Context.GetHttpContext();
+            // string nickname = httpContext.Request.Query["nick"];
+            // string groupname = httpContext.Request.Query["groupname"];
+
+
             await Clients.Caller.SendAsync("OnUserConnectionToGroup", new { usersInGroup = usersInGroup, groupMessages = groupMessages });
             await Clients.OthersInGroup(groupname).SendAsync("OnUserJoinGroup", presentUser);
+        }
+
+        public async void ChangeUserGroup(string previousGroup)
+        {
+            List<string> remainingUsers = _groupTracker.GetGroupUsers(previousGroup);
+            await Clients.OthersInGroup(previousGroup).SendAsync("OnUserChangingGroup", remainingUsers);
         }
 
         public async void SendGroupMessage(MessageDto message)
