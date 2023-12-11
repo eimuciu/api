@@ -1,15 +1,18 @@
 [
-    {
-      "Name": "Music"
-    },
-    {
-      "Name": "Movies"
-    },
-    {
-      "Name": "Programming"
-    },
-    {
-      "Name": "Travel"
-    }
-  ]
-  
+  {
+    "Name": "Music",
+    "Description": "Music lovers who feel more than just sounds in music"
+  },
+  {
+    "Name": "Movies",
+    "Description": "Love watching movies? Please stay."
+  },
+  {
+    "Name": "Programming",
+    "Description": "Ask questions, share, coolaborate. It is about programming."
+  },
+  {
+    "Name": "Travel",
+    "Description": "Where would you go? What else to do if not explore. Travel Group." 
+  }
+]
