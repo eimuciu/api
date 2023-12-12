@@ -13,6 +13,10 @@
   },
   {
     "Name": "Travel",
-    "Description": "Where would you go? What else to do if not explore. Travel Group." 
+    "Description": "Where would you go? What else to do if not explore. Travel Group."
+  },
+  {
+    "Name": "Feedback",
+    "Description": "Please leave a feedback about the app. Any group recommendations, tech improvement comments are appreciated."
   }
 ]

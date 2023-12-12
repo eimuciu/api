@@ -1,27 +1,27 @@
 [
   {
-    "Content": "My message",
+    "Content": "hello",
     "SenderId": 1,
     "SenderNickname": "Peter",
     "GroupId": 1,
     "GroupName": "Music"
   },
   {
-    "Content": "My message 2",
+    "Content": "hi",
     "SenderId": 2,
     "SenderNickname": "John",
     "GroupId": 1,
     "GroupName": "Music"
   },
   {
-    "Content": "My message Off",
+    "Content": "hey",
     "SenderId": 2,
     "SenderNickname": "John",
     "GroupId": 2,
     "GroupName": "Movies"
   },
   {
-    "Content": "My message ON By ",
+    "Content": "olia",
     "SenderId": 3,
     "SenderNickname": "Max",
     "GroupId": 2,
