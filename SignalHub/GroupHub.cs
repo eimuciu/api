@@ -16,7 +16,7 @@ namespace api.SignalHub
             _messageRepository = messageRepository;
             _userRepository = userRepository;
         }
-        public async void ConnectUserToGroup(string nickname, string groupname, string previousGroup)
+        public async Task ConnectUserToGroup(string nickname, string groupname, string previousGroup)
         {
 
             await Groups.AddToGroupAsync(Context.ConnectionId, groupname);
@@ -42,13 +42,13 @@ namespace api.SignalHub
             await Clients.OthersInGroup(groupname).SendAsync("OnUserJoinGroup", presentUser);
         }
 
-        public async void ChangeUserGroup(string previousGroup)
+        public async Task ChangeUserGroup(string previousGroup)
         {
             List<string> remainingUsers = _groupTracker.GetGroupUsers(previousGroup);
             await Clients.OthersInGroup(previousGroup).SendAsync("OnUserChangingGroup", remainingUsers);
         }
 
-        public async void SendGroupMessage(MessageDto message)
+        public async Task SendGroupMessage(MessageDto message)
         {
             Message newMsg = await _messageRepository.AddNewMessage(message);
             await Clients.Group(message.GroupName).SendAsync("NewMessage", newMsg);
@@ -59,9 +59,6 @@ namespace api.SignalHub
             var httpContext = Context.GetHttpContext();
             string nickname = httpContext.Request.Query["nick"];
             string groupname = httpContext.Request.Query["groupname"];
-
-            Console.WriteLine("User disconnecting from group");
-            Console.WriteLine(nickname);
 
             _groupTracker.RemoveUserFromGroup(groupname, nickname);
 

@@ -23,9 +23,6 @@ namespace api.SignalHub
             var httpClient = Context.GetHttpContext();
             var query = httpClient.Request.Query["nick"];
 
-            Console.WriteLine("User disconnecting");
-            Console.WriteLine(query);
-
             _tracker.RemoveUser(query, Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
